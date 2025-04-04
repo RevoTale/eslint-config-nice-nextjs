@@ -1,61 +1,67 @@
 {
-    "name": "eslint-config-nice-nextjs",
-    "type": "module",
-    "version": "119.0.0",
-    "description": "A TypeScript ESLint config for Next.js",
-    "main": "dist/index.js",
-    "scripts": {
-      "compile": "tsc",
-      "lint": "eslint .",
-      "format/check": "prettier . --check",
-      "format/fix": "prettier . --write"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/RevoTale/eslint-config-nice-nextjs.git"
-    },
-    "author": "<l-you@revotale.com> (l-you)",
-    "license": "MIT",
-    "bugs": {
-      "url": "https://github.com/RevoTale/eslint-config-nice-nextjs/issues"
-    },
-    "homepage": "https://github.com/RevoTale/eslint-config-nice-nextjs#readme",
-    "keywords": [
-      "check",
-      "checker",
-      "code",
-      "code checker",
-      "code linter",
-      "code standards",
-      "code style",
-      "enforce",
-      "eslint",
-      "eslintconfig",
-      "hint",
-      "jscs",
-      "jshint",
-      "lint",
-      "policy",
-      "quality",
-      "simple",
-      "style",
-      "style checker",
-      "style linter",
-      "verify",
-      "TypeScript",
-      "nextjs",
-      "next js",
-      "next"
-    ],
-    "dependencies": {
-     
-    },
-    "peerDependencies": {
-      "eslint": "^9.12.0",
-      "typescript": "*"
-    },
-    "devDependencies": {
-      "eslint": "9.23.0",
-      "typescript": "5.8.2"
-    }
+  "name": "eslint-config-nice-nextjs",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "A TypeScript ESLint config for Next.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "compile": "tsc",
+    "lint": "eslint .",
+    "format/check": "prettier . --check",
+    "format/fix": "prettier . --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RevoTale/eslint-config-nice-nextjs.git"
+  },
+  "author": "<l-you@revotale.com> (l-you)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RevoTale/eslint-config-nice-nextjs/issues"
+  },
+  "homepage": "https://github.com/RevoTale/eslint-config-nice-nextjs#readme",
+  "keywords": [
+    "check",
+    "checker",
+    "code",
+    "code checker",
+    "code linter",
+    "code standards",
+    "code style",
+    "enforce",
+    "eslint",
+    "eslintconfig",
+    "hint",
+    "jscs",
+    "jshint",
+    "lint",
+    "policy",
+    "quality",
+    "simple",
+    "style",
+    "style checker",
+    "style linter",
+    "verify",
+    "TypeScript",
+    "nextjs",
+    "next js",
+    "next"
+  ],
+  "peerDependencies": {
+    "eslint": ">=9.12.0",
+    "eslint-config-love": ">=119.0.0",
+    "typescript": "*"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^15.2.4",
+    "eslint": "9.23.0",
+    "eslint-plugin-prettier": "^5.2.6",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "typescript": "5.8.2"
+  },
+  "dependencies": {
+    "@typescript-eslint/utils": "^8.29.0",
+    "typescript-eslint": "^8.29.0"
   }
+}
