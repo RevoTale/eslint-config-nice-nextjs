@@ -1,5 +1,11 @@
 # eslint-config-nice-nextjs
 
+## 0.1.4
+
+### Patch Changes
+
+- 46b29f3: More informative readme
+
 ## 0.1.3
 
 ### Patch Changes
