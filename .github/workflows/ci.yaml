@@ -7,6 +7,38 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 permissions:
   contents: read # Added for better security
 jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4.1.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm lint
+
+  Types:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4.1.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm typecheck
+
+  Finalize:
+    needs: [Lint, Types]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Success
+        run: echo "All checks passed. Ready to merge!"
   release:
     if: github.repository == 'RevoTale/eslint-config-nice-nextjs'
     concurrency: release
