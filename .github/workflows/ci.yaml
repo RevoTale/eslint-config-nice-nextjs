@@ -1,11 +1,9 @@
-name: Release
+name: CI
 on:
   push:
-    branches:
-      - '*' # Trigger on push for all branches
   pull_request:
-    branches:
-      - '*' # Trigger on pull request for all branches    
+      types:
+        - opened
   workflow_dispatch: # Allow manual execution of the workflow
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 permissions:
@@ -19,7 +17,7 @@ jobs:
       - uses: pnpm/action-setup@v4.1.0
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 23
           cache: pnpm
       - run: pnpm install
       - run: pnpm lint
