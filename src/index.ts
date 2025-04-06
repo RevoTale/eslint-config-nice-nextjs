@@ -1,12 +1,12 @@
 import love from 'eslint-config-love';
-import prettier from 'eslint-plugin-prettier/recommended';
-import tseslint from 'typescript-eslint';
+
+import tseslint,   { type ConfigArray } from 'typescript-eslint';
 import nextPlugin from '@next/eslint-plugin-next';
 import reactPlugin from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';
-import type { TSESLint } from '@typescript-eslint/utils';
 
-const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
+
+const config: ConfigArray = tseslint.config(
     // Global ignores
     {
         ignores: [
@@ -39,8 +39,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
             complexity: 'error',
             '@typescript-eslint/prefer-destructuring': 'error',
         },
-    },
-    prettier
+    }
 );
 
 export default config;
