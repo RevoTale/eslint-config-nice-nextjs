@@ -1,11 +1,16 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "module": "nodenext",
     "outDir": "dist",
-    "sourceMap": true,
-    "strict": true
+    "sourceMap": false, 
+    "strict": true,
+    "noEmit": false 
   },
-  "include": ["src/**/*.ts"]
+  "include": [
+    "src/**/*.ts"
+  ]
 }
