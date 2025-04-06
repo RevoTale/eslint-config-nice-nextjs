@@ -12,7 +12,7 @@ importers:
         specifier: ^8.29.0
         version: 8.29.0(eslint@9.23.0)(typescript@5.8.2)
       eslint-config-love:
-        specifier: '>=119.0.0'
+        specifier: ^119.0.0
         version: 119.0.0(@typescript-eslint/parser@8.29.0(eslint@9.23.0)(typescript@5.8.2))(eslint@9.23.0)(typescript@5.8.2)
       typescript-eslint:
         specifier: ^8.29.0
@@ -25,7 +25,7 @@ importers:
         specifier: ^15.2.4
         version: 15.2.4
       eslint:
-        specifier: 9.23.0
+        specifier: ^9.23.0
         version: 9.23.0
       eslint-plugin-prettier:
         specifier: ^5.2.6
@@ -36,6 +36,9 @@ importers:
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
         version: 5.2.0(eslint@9.23.0)
+      prettier:
+        specifier: ^3.5.3
+        version: 3.5.3
       typescript:
         specifier: 5.8.2
         version: 5.8.2

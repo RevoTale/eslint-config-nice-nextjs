@@ -8,7 +8,7 @@
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
     "postCreateCommand": {
-        "Configure Build Tools": " npm install -g pnpm && pnpm install"
+        "Configure Build Tools": "npm install -g pnpm && pnpm install"
     },
     // Configure tool-specific properties.
     "customizations": {
