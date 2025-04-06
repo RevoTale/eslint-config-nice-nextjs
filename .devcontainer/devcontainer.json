@@ -15,7 +15,8 @@
         "vscode": {
             "extensions": [
                 "dbaeumer.vscode-eslint",
-                "GitHub.vscode-github-actions"
+                "GitHub.vscode-github-actions",
+                "GitHub.vscode-pull-request-github"
             ]
         }
     },
