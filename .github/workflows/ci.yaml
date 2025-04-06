@@ -5,6 +5,11 @@ on:
       types:
         - opened
   workflow_dispatch: # Allow manual execution of the workflow
+  workflow_run: # Trigger on workflows run by Changesets
+    workflows: ["Release"]
+    types:
+      - completed
+
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 permissions:
   contents: read # Added for better security
