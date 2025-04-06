@@ -17,6 +17,7 @@ jobs:
 
     name: Release
     runs-on: ubuntu-latest
+    needs: [Lint, Types] # Ensure tests pass before running this job
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
