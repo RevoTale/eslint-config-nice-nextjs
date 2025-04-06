@@ -4,6 +4,8 @@ on:
   pull_request:
       types:
         - opened
+        - synchronize
+        - reopened
   workflow_dispatch: # Allow manual execution of the workflow
   workflow_run: # Trigger on workflows run by Changesets
     workflows: ["Release"]
@@ -47,7 +49,10 @@ jobs:
       - name: Success
         run: echo "All checks passed. Ready to merge!"
   release:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'RevoTale/eslint-config-nice-nextjs'
+    # Run on push to main OR on PRs from changeset-release branch to main
+    if: |
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'pull_request' && github.head_ref == 'changeset-release/main' && github.base_ref == 'main')
     concurrency: release
     # prevents this action from running on forks
     permissions:
