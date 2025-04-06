@@ -1,5 +1,5 @@
 import love from 'eslint-config-love';
-import prettier from 'eslint-plugin-prettier/recommended';
+
 import tseslint from 'typescript-eslint';
 import nextPlugin from '@next/eslint-plugin-next';
 import reactPlugin from 'eslint-plugin-react';
@@ -39,8 +39,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
             complexity: 'error',
             '@typescript-eslint/prefer-destructuring': 'error',
         },
-    },
-    prettier
+    }
 );
 
 export default config;
