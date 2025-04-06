@@ -4,7 +4,8 @@ on:
     branches:
       - main
 concurrency: ${{ github.workflow }}-${{ github.ref }}
-permissions: {}
+permissions:
+  contents: read # Added for better security
 jobs:
   release:
     if: github.repository == 'RevoTale/eslint-config-nice-nextjs'
@@ -18,6 +19,7 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     needs: [Lint, Types] # Ensure tests pass before running this job
+    timeout-minutes: 10 # Added to prevent indefinite runs
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -25,7 +27,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 23.x
+          node-version: 20.x # Updated to a stable LTS version
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Create Release Pull Request or Publish to npm
