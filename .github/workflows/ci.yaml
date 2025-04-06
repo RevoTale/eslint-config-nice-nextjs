@@ -2,7 +2,11 @@ name: Release
 on:
   push:
     branches:
-      - main
+      - '*' # Trigger on push for all branches
+  pull_request:
+    branches:
+      - '*' # Trigger on pull request for all branches    
+  workflow_dispatch: # Allow manual execution of the workflow
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 permissions:
   contents: read # Added for better security
@@ -40,7 +44,7 @@ jobs:
       - name: Success
         run: echo "All checks passed. Ready to merge!"
   release:
-    if: github.repository == 'RevoTale/eslint-config-nice-nextjs'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'RevoTale/eslint-config-nice-nextjs'
     concurrency: release
     # prevents this action from running on forks
     permissions:
