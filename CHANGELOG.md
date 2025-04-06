@@ -1,5 +1,11 @@
 # eslint-config-nice-nextjs
 
+## 0.1.3
+
+### Patch Changes
+
+- acfc874: Fix deps
+
 ## 0.1.2
 
 ### Patch Changes
