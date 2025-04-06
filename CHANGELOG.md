@@ -1,5 +1,11 @@
 # eslint-config-nice-nextjs
 
+## 0.1.2
+
+### Patch Changes
+
+- f1f78ee: Fix package access
+
 ## 0.1.1
 
 ### Patch Changes
