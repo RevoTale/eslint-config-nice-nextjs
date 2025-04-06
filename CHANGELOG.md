@@ -1,5 +1,11 @@
 # eslint-config-nice-nextjs
 
+## 0.1.1
+
+### Patch Changes
+
+- 05694a5: Publish only compiled files
+
 ## 0.1.0
 
 ### Minor Changes
