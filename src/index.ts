@@ -4,9 +4,9 @@ import tseslint from 'typescript-eslint';
 import nextPlugin from '@next/eslint-plugin-next';
 import reactPlugin from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';
-import { TSESLint } from '@typescript-eslint/utils';
+import type { TSESLint } from '@typescript-eslint/utils';
 
-const config:TSESLint.FlatConfig.ConfigArray= tseslint.config(
+const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
     // Global ignores
     {
         ignores: [
@@ -19,10 +19,8 @@ const config:TSESLint.FlatConfig.ConfigArray= tseslint.config(
         plugins: {
             react: reactPlugin,
             'react-hooks': hooksPlugin,
-            // @ts-ignore
             '@next/next': nextPlugin,
         },
-        // @ts-ignore
         rules: {
             ...reactPlugin.configs['jsx-runtime'].rules,
             ...hooksPlugin.configs.recommended.rules,
