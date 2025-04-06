@@ -12,6 +12,7 @@
     "lint:fix": "eslint . --fix",
     "changeset:version": "changeset version && git add --all",
     "changeset:publish": "changeset publish",
+    "changeset":"changeset",
     "prepare": "pnpm build"
   },
   "repository": {
