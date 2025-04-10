@@ -34,7 +34,8 @@ const config: ConfigArray = tseslint.config(
         rules: {
             ...love.rules,
             '@typescript-eslint/strict-boolean-expressions': 'error',
-            '@typescript-eslint/no-magic-numbers': 'error',
+            // eslint-disable-next-line @typescript-eslint/no-magic-numbers -- self shoot
+            '@typescript-eslint/no-magic-numbers': ['error', {ignore: [0, 1]}],
             '@typescript-eslint/explicit-function-return-type': 'error',
             complexity: 'error',
             '@typescript-eslint/prefer-destructuring': 'error',
