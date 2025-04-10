@@ -1,5 +1,11 @@
 # eslint-config-nice-nextjs
 
+## 0.1.5
+
+### Patch Changes
+
+- bf28546: Allow zero and one magic number
+
 ## 0.1.4
 
 ### Patch Changes
