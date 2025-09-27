@@ -63,7 +63,7 @@
     "@changesets/cli": "^2.28.1",
     "@eslint/config-helpers": "^0.2.1",
     "eslint": "^9.23.0",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   },
   "dependencies": {
     "eslint-config-love": "^119.0.0",
