@@ -68,7 +68,7 @@
   "dependencies": {
     "eslint-config-love": "^130.0.0",
     "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.2.0"
+    "eslint-plugin-react-hooks": "^6.1.0"
   },
   "peerDependenciesMeta": {
     "typescript": {
