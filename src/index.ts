@@ -4,7 +4,7 @@ import type  { ConfigArray } from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 import love from 'eslint-config-love';
 import nextPlugin from '@next/eslint-plugin-next';
-//Temporary disable next.js plugin until it supports eslint v9
+import type { Linter } from 'eslint';
 const config: ConfigArray = defineConfig(
     // Global ignores
     {
@@ -14,20 +14,12 @@ const config: ConfigArray = defineConfig(
             'node_modules/**/*'
         ],
     },
- {
-    plugins: {
-            // @ts-expect-error -- workaround until tseslint or eslint-config-love will abandon their '.config.' funtion in favor of  eslint v9 defineConfig
-      '@next/next': nextPlugin,
-    },
-  
-    rules: {
-                    // @ts-expect-error -- workaround until tseslint or eslint-config-love will abandon their '.config.' funtion in favor of  eslint v9 defineConfig
-        ...nextPlugin.configs.recommended.rules,
-                    // @ts-expect-error -- workaround until tseslint or eslint-config-love will abandon their '.config.' funtion in favor of  eslint v9 defineConfig
-      ...nextPlugin.configs['core-web-vitals'].rules,
-    },
-  },
+   nextPlugin.flatConfig.coreWebVitals as Linter.Config,
+     nextPlugin.flatConfig.recommended as Linter.Config,
+
+    // @ts-expect-error -- misused spread, but we need to keep it until the plugin is updated
     {
+        
         ...love,
        files: ['{src,app}/**/*.{js,ts,tsx}'],
     },
