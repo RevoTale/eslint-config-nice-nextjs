@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-misused-spread -- workaround until tseslint or eslint-config-love will abandon their '.config.' funtion in favor of  eslint v9 defineConfig */
+ 
 
 import { defineConfig } from 'eslint/config';
 import love from 'eslint-config-love';
 import nextPlugin from '@next/eslint-plugin-next';
-import type { Linter } from 'eslint';
 import type { Config } from '@eslint/config-helpers';
 const config: Config[] = defineConfig(
     // Global ignores
@@ -14,10 +13,9 @@ const config: Config[] = defineConfig(
             'node_modules/**/*'
         ],
     },
-   nextPlugin.flatConfig.coreWebVitals as Linter.Config,
-     nextPlugin.flatConfig.recommended as Linter.Config,
-
     // @ts-expect-error -- misused spread, but we need to keep it until the plugin is updated
+    nextPlugin.flatConfig.coreWebVitals,
+    nextPlugin.flatConfig.recommended,
     {
         
         ...love,
