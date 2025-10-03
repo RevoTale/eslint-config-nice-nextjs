@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint:against-errors": "eslint ./src",
+    "lint:against-clear":"eslint ./src/app/files-without-lint-error"
   },
   "dependencies": {
     "dist": "link:../dist",
