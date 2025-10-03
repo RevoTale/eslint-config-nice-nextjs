@@ -4,11 +4,8 @@ on:
     branches:
       - main
   pull_request:
-      types:
-        - opened
-        - synchronize
-        - reopened
-  workflow_dispatch: # Allow manual execution of the workflow
+    branches:
+      - main
   workflow_run: # Trigger on workflows run by Changesets
     workflows: ["Release"]
     types:
