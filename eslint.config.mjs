@@ -5,6 +5,6 @@ export default [
     globalIgnores(['**/node_modules/**', '**/dist/**', '**/build/**']),
   {
     ...love,
-    files: ['**/*.js', '**/*.ts'],
+    files: [ '**/*.ts'],
   },
 ]
