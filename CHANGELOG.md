@@ -1,5 +1,11 @@
 # eslint-config-nice-nextjs
 
+## 0.1.6
+
+### Patch Changes
+
+- 8fedf3f: Fix versioning
+
 ## 0.1.5
 
 ### Patch Changes
