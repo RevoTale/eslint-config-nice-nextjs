@@ -1,4 +1,4 @@
-import niceNextjs from '../dist/index.js';
+import niceNextjs from 'dist';
 
 const eslintConfig = [
   {
