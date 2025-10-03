@@ -43,9 +43,20 @@ jobs:
           cache: pnpm
       - run: pnpm install
       - run: pnpm typecheck
-
+  AppLintTest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4.1.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install
+      - run: cd ts-next-app && pnpm run lint ./src
   Finalize:
-    needs: [Lint, Types]
+    needs: [Lint, Types, AppLintTest]
     runs-on: ubuntu-latest
     steps:
       - name: Success
