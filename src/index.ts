@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-misused-spread -- workaround until tseslint or eslint-config-love will abandon their '.config.' funtion in favor of  eslint v9 defineConfig */
 
-import type  { ConfigArray } from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 import love from 'eslint-config-love';
 import nextPlugin from '@next/eslint-plugin-next';
 import type { Linter } from 'eslint';
-const config: ConfigArray = defineConfig(
+import type { Config } from '@eslint/config-helpers';
+const config: Config[] = defineConfig(
     // Global ignores
     {
         ignores: [

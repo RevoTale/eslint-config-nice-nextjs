@@ -7,7 +7,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint:against-errors": "eslint ./src",
-    "lint:against-clear":"eslint ./src/app/files-without-lint-error"
+    "lint:against-clear": "eslint ./src/app/files-without-lint-error"
   },
   "dependencies": {
     "dist": "link:../dist",
@@ -16,7 +16,6 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
     "@types/node": "^20.19.19",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
