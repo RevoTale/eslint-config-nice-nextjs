@@ -1,5 +1,17 @@
 # eslint-config-nice-nextjs
 
+## 0.2.0
+
+### Minor Changes
+
+- 1e6146a: Test config on the example production next.js app with both success and failing rules
+- d18f160: Removed 70% of dependencies previously used by this config.
+
+### Patch Changes
+
+- 38a7e8a: Removed the kludge regarding TypeScript definitions and unofficial usage of the Next.js plugin.
+- 54ae036: Rewrite from scratch eslint-config-love and eslint-plugin-next composition. Fix type and compatability errors. Reduce complexity of dependencies required for this eslint config.
+
 ## 0.1.6
 
 ### Patch Changes
