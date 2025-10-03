@@ -13,7 +13,10 @@ const config: ConfigArray = defineConfig(
         ],
     },
     // @ts-expect-error -- workaround until tseslint or eslint-config-love will abandon their '.config.' funtion in favor of  eslint v9 defineConfig
-    love,
+    {
+        ...love,
+       files: ['{src,app}/**/*.{js,ts,tsx}'],
+    },
     {
         files: ['{src,app}/**/*.{js,ts,tsx}'],
         rules: {
