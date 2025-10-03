@@ -1,15 +1,10 @@
-import love from 'eslint-config-love';
+ 
 
-import type  { ConfigArray } from 'typescript-eslint';
-import hooksPlugin from 'eslint-plugin-react-hooks';
 import { defineConfig } from 'eslint/config';
-import { FlatCompat } from "@eslint/eslintrc";
-const compat = new FlatCompat({
-  // import.meta.dirname is available after Node.js v20.11.0
-  baseDirectory: import.meta.dirname,
-})
-
-const config: ConfigArray = defineConfig(
+import love from 'eslint-config-love';
+import nextPlugin from '@next/eslint-plugin-next';
+import type { Config } from '@eslint/config-helpers';
+const config: Config[] = defineConfig(
     // Global ignores
     {
         ignores: [
@@ -18,20 +13,17 @@ const config: ConfigArray = defineConfig(
             'node_modules/**/*'
         ],
     },
-    ...compat.config({
-    extends: ['next/core-web-vitals', 'next/typescript','eslint-config-love'],
-  }),
+    // @ts-expect-error -- misused spread, but we need to keep it until the plugin is updated
+    nextPlugin.flatConfig.coreWebVitals,
+    nextPlugin.flatConfig.recommended,
     {
-        files: ["src/**/*.{js,jsx,ts,tsx}"],
-        plugins: {
-        'react-hooks': hooksPlugin,
-        },
-        extends: ['react-hooks/recommended'],
+        
+        ...love,
+       files: ['{src,app}/**/*.{js,ts,tsx}'],
     },
     {
         files: ['{src,app}/**/*.{js,ts,tsx}'],
         rules: {
-            ...love.rules,
             '@typescript-eslint/strict-boolean-expressions': 'error',
             // eslint-disable-next-line @typescript-eslint/no-magic-numbers -- self shoot
             '@typescript-eslint/no-magic-numbers': ['error', {ignore: [0, 1]}],

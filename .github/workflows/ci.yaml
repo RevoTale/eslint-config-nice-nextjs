@@ -43,9 +43,47 @@ jobs:
           cache: pnpm
       - run: pnpm install
       - run: pnpm typecheck
+  AppLintTest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4.1.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm build
+      - name: This step ensures that the lint command works
+        run: pnpm lint
+      - run: cd ts-next-app && pnpm install && pnpm run lint:against-clear
+  AppLintTestExpectFailure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4.1.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm build
+      - name: This step ensures that the lint command works
+        run: pnpm lint
+      - name: Test lint command that is expected to fail
+        id: failing_step
+        run: |
+          cd ts-next-app && pnpm install && pnpm run lint:against-errors
+        continue-on-error: true
 
+      - name: Finalize lint failure test
+        if: steps.failing_step.outcome == 'success'
+        run: |
+          echo "ESLint does not check errors for some reason"
+          exit 1
   Finalize:
-    needs: [Lint, Types]
+    needs: [Lint, Types, AppLintTest,AppLintTestExpectFailure]
     runs-on: ubuntu-latest
     steps:
       - name: Success
