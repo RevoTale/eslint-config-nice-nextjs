@@ -52,23 +52,23 @@
     "next"
   ],
   "peerDependencies": {
-    "eslint": "^9.0",
-    "typescript": "*",
-    "prettier": "^3.3",
     "@next/eslint-plugin-next": "^15.2.4",
-    "@typescript-eslint/utils": "^8.29.0",
+    "eslint": "^9.0",
+    "eslint-config-love": ">=130.0.0",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^6.1.0",
+    "typescript": "*",
     "typescript-eslint": "^8.29.0"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.28.1",
-    "@eslint/config-helpers": "^0.2.1",
-    "eslint": "^9.23.0",
-    "typescript": "5.9.3"
+    "@changesets/cli": "^2.29.7",
+    "@types/node": "^24.6.2",
+    "eslint": "^9.36.0",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "eslint-config-love": "^130.0.0",
-    "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.2.0"
+    "@eslint/config-helpers": "^0.4.0",
+    "@eslint/eslintrc": "^3.3.1"
   },
   "peerDependenciesMeta": {
     "typescript": {

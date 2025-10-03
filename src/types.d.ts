@@ -1,12 +1,12 @@
 declare module '@next/eslint-plugin-next' {
-  import type {Plugin,RuleEntry} from '@eslint/config-helpers';
+  import type {Plugin,RuleConfig} from '@eslint/config-helpers';
   const nextPlugin: Omit<Plugin,'configs'>&{
     configs: {
       recommended: {
-        rules: Record<string,RuleEntry>
+        rules: RuleConfig
       };
       'core-web-vitals': {
-        rules: Record<string, RuleEntry>;
+        rules:RuleConfig
       };
     };
   };

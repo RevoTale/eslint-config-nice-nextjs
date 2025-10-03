@@ -1,12 +1,15 @@
 import love from 'eslint-config-love';
 
-import tseslint,   { type ConfigArray } from 'typescript-eslint';
-import nextPlugin from '@next/eslint-plugin-next';
-import reactPlugin from 'eslint-plugin-react';
+import type  { ConfigArray } from 'typescript-eslint';
 import hooksPlugin from 'eslint-plugin-react-hooks';
+import { defineConfig } from 'eslint/config';
+import { FlatCompat } from "@eslint/eslintrc";
+const compat = new FlatCompat({
+  // import.meta.dirname is available after Node.js v20.11.0
+  baseDirectory: import.meta.dirname,
+})
 
-
-const config: ConfigArray = tseslint.config(
+const config: ConfigArray = defineConfig(
     // Global ignores
     {
         ignores: [
@@ -15,21 +18,17 @@ const config: ConfigArray = tseslint.config(
             'node_modules/**/*'
         ],
     },
+    ...compat.config({
+    extends: ['next/core-web-vitals', 'next/typescript','eslint-config-love'],
+  }),
     {
+        files: ["src/**/*.{js,jsx,ts,tsx}"],
         plugins: {
-            react: reactPlugin,
-            'react-hooks': hooksPlugin,
-            '@next/next': nextPlugin,
+        'react-hooks': hooksPlugin,
         },
-        rules: {
-            ...reactPlugin.configs['jsx-runtime'].rules,
-            ...hooksPlugin.configs.recommended.rules,
-            ...nextPlugin.configs.recommended.rules,
-            ...nextPlugin.configs['core-web-vitals'].rules,
-        },
+        extends: ['react-hooks/recommended'],
     },
     {
-        ...love,
         files: ['{src,app}/**/*.{js,ts,tsx}'],
         rules: {
             ...love.rules,
