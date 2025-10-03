@@ -54,7 +54,7 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install
-      - run: cd ts-next-app&& pnpm run lint:against-clear
+      - run: cd ts-next-app && pnpm run lint:against-clear
   AppLintTestExpectFailure:
     runs-on: ubuntu-latest
     steps:
