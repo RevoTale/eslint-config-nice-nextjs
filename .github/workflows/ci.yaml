@@ -40,7 +40,7 @@ jobs:
           cache: pnpm
       - run: pnpm install
       - run: pnpm typecheck
-  AppLintTest:
+  ProductionLintTest:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -54,33 +54,16 @@ jobs:
       - run: pnpm build
       - name: This step ensures that the lint command works
         run: pnpm lint
-      - run: cd ts-next-app && pnpm install && pnpm run lint:against-clear
-  AppLintTestExpectFailure:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4.1.0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: pnpm
-      - run: pnpm install
-      - run: pnpm build
-      - name: This step ensures that the lint command works
-        run: pnpm lint
-      - name: Test lint command that is expected to fail
-        id: failing_step
+      - run: cd ts-next-app && pnpm install
+      - name: Check ESLint errors
         run: |
-          cd ts-next-app && pnpm install && pnpm run lint:against-errors
-        continue-on-error: true
-
-      - name: Finalize lint failure test
-        if: steps.failing_step.outcome == 'success'
-        run: |
-          echo "ESLint does not check errors for some reason"
-          exit 1
+          output=$(pnpm lint 2>&1 || true)
+          echo "$output"
+          echo "$output" | grep -q "react-hooks/exhaustive-deps" && \
+          echo "$output" | grep -q "@typescript-eslint/no-unused-vars" && \
+          echo "$output" | grep -q "@typescript-eslint/explicit-function-return-type"
   Finalize:
-    needs: [Lint, Types, AppLintTest,AppLintTestExpectFailure]
+    needs: [Lint, Types, ProductionLintTest]
     runs-on: ubuntu-latest
     steps:
       - name: Success
