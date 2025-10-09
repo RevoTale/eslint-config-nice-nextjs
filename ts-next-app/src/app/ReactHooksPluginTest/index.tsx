@@ -7,7 +7,7 @@ const ReactHooksPluginTest:FunctionComponent = ()=>{
     const router = useRouter();
     useEffect(()=>{
       void router.push('/some-route?state='+state);
-    },[router,state])
+    },[router])
     return <div onClick={()=>{
           setState(state+1)
     }}>ReactHooksPluginTest</div>;
