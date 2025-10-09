@@ -68,6 +68,7 @@ jobs:
             "no-unused-vars"
             "react-hooks/exhaustive-deps"
             "@typescript-eslint/explicit-function-return-type"
+            "'React' is defined but never used"
           )
 
           # Track status

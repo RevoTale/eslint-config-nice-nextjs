@@ -5,7 +5,8 @@ import love from 'eslint-config-love';
 import nextPlugin from '@next/eslint-plugin-next';
 import type { Config } from '@eslint/config-helpers';
 import reactHooks from 'eslint-plugin-react-hooks';
-
+import reactPlugin from 'eslint-plugin-react'
+import globals from 'globals';
 const config: Config[] = defineConfig(
     // Global ignores
     {
@@ -15,17 +16,37 @@ const config: Config[] = defineConfig(
             'node_modules/**/*'
         ],
     },
+     {
+        settings:{
+            react:{
+                version:'detect'
+            }
+        },
+    },
     // @ts-expect-error -- misused spread, but we need to keep it until the plugin is updated
-    nextPlugin.flatConfig.coreWebVitals,
-    nextPlugin.flatConfig.recommended,
+        {
+        
+        ...love,
+       files: ['**/*.{js,ts,tsx}'],
+    },
+   {
+    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
+    ...reactPlugin.configs.flat.recommended,
+    languageOptions: {
+      ...reactPlugin.configs.flat.recommended.languageOptions,
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+      },
+    },
+  },
+ reactPlugin.configs.flat['jsx-runtime'], 
+  
     // @ts-expect-error -- misused spread, but we need to keep it until the plugin is updated
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access -- misused spread, but we need to keep it until the plugin is updated
     reactHooks.configs.flat.recommended,
-    {
-        
-        ...love,
-       files: ['{src,app}/**/*.{js,ts,tsx}'],
-    },
+  nextPlugin.flatConfig.coreWebVitals,
+    nextPlugin.flatConfig.recommended,
     {
         files: ['{src,app}/**/*.{js,ts,tsx}'],
         rules: {
