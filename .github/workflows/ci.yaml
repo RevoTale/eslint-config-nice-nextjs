@@ -56,13 +56,25 @@ jobs:
         run: pnpm lint
         continue-on-error: true
       - run: cd ts-next-app && pnpm install
+      - name: Run ESLint in ts-next-app
+        id: eslint_test
+        working-directory: ts-next-app
+        run: |
+          set -o pipefail
+          pnpm lint 2>&1 | tee eslint-output.log
+        continue-on-error: true
+      - name: Fail if lint unexpectedly passed
+        if: steps.eslint_test.conclusion == 'success'
+        run: |
+          echo "Expected ESLint to report the known errors, but it passed."
+          exit 1
       - name: Check ESLint errors
         run: |
-          output=$(pnpm lint 2>&1 || true)
-          echo "$output"
-          echo "$output" | grep -q "react-hooks/exhaustive-deps" && \
-          echo "$output" | grep -q "@typescript-eslint/no-unused-vars" && \
-          echo "$output" | grep -q "@typescript-eslint/explicit-function-return-type"
+          output_file="ts-next-app/eslint-output.log"
+
+          grep -q "React Hook useEffect has a missing dependency: 'state'.*react-hooks/exhaustive-deps" "$output_file"
+          grep -q "'ReactNode' is defined but never used.*@typescript-eslint/no-unused-vars" "$output_file"
+          grep -q "Missing return type on function.*@typescript-eslint/explicit-function-return-type" "$output_file"
   Finalize:
     needs: [Lint, Types, ProductionLintTest]
     runs-on: ubuntu-latest
