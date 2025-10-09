@@ -54,11 +54,11 @@ jobs:
       - run: pnpm build
       - name: This step ensures that the lint command works
         run: pnpm lint
-        continue-on-error: true
       - run: cd ts-next-app && pnpm install
       - name: Run ESLint in ts-next-app
         id: eslint_test
         working-directory: ts-next-app
+        continue-on-error: true
         run: |
           set -euo pipefail
           pnpm lint 2>&1 | tee eslint-output.log
