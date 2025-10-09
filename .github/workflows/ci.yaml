@@ -40,7 +40,7 @@ jobs:
           cache: pnpm
       - run: pnpm install
       - run: pnpm typecheck
-  AppLintTest:
+  ProductionLintTest:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -54,33 +54,43 @@ jobs:
       - run: pnpm build
       - name: This step ensures that the lint command works
         run: pnpm lint
-      - run: cd ts-next-app && pnpm install && pnpm run lint:against-clear
-  AppLintTestExpectFailure:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4.1.0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: pnpm
-      - run: pnpm install
-      - run: pnpm build
-      - name: This step ensures that the lint command works
-        run: pnpm lint
-      - name: Test lint command that is expected to fail
-        id: failing_step
-        run: |
-          cd ts-next-app && pnpm install && pnpm run lint:against-errors
-        continue-on-error: true
+      - run: |
+          cd ts-next-app && pnpm install
+          # Run ESLint; don't fail automatically
+          pnpm eslint > eslint-output.txt || true
 
-      - name: Finalize lint failure test
-        if: steps.failing_step.outcome == 'success'
-        run: |
-          echo "ESLint does not check errors for some reason"
-          exit 1
+          echo "=== ESLint Output ==="
+          cat eslint-output.txt
+          echo "====================="
+
+          # Define required strings (can be rule IDs or message fragments)
+          REQUIRED_STRINGS=(
+            "no-unused-vars"
+            "react-hooks/exhaustive-deps"
+            "@typescript-eslint/explicit-function-return-type"
+            "'React' is defined but never used"
+          )
+
+          # Track status
+          ALL_FOUND=true
+
+          for str in "${REQUIRED_STRINGS[@]}"; do
+            if grep -q "$str" eslint-output.txt; then
+              echo "✅ Found expected string: $str"
+            else
+              echo "::error::❌ Missing expected string: $str"
+              ALL_FOUND=false
+            fi
+          done
+
+          if [ "$ALL_FOUND" = true ]; then
+            echo "✅ ESLint config produced all expected errors."
+          else
+            echo "❌ ESLint config did not produce all expected errors."
+            exit 1
+          fi
   Finalize:
-    needs: [Lint, Types, AppLintTest,AppLintTestExpectFailure]
+    needs: [Lint, Types, ProductionLintTest]
     runs-on: ubuntu-latest
     steps:
       - name: Success

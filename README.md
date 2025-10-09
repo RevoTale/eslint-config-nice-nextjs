@@ -1,113 +1,111 @@
 # eslint-config-nice-nextjs
 
-A modern, powerful ESLint configuration for Next.js projects that combines strict TypeScript checking with React best practices. Built on the tope `eslint-config-love`. This configuration ensures high-quality, consistent code across your Next.js application.
+An ESLint setup for Next.js apps. It uses the ESLint flat config style (ESLint 9+) and pulls in React, React Hooks, Next.js, and TypeScript rules so you get useful checks out of the box.
 
 ## Features
 
-- **Next.js Optimized**: Includes official Next.js rules from `@next/eslint-plugin-next` for both recommended and core web vitals configurations
-- **React Support**: Incorporates React and React Hooks rules to ensure proper component patterns
-- **TypeScript Integration**: Full support for [TypeScript](https://www.typescriptlang.org/) with strict type checking rules
-- **Performance Focus**: Structured for optimal performance with smart file patterns
-- **Clean Architecture**: Encourages maintainable code organization with directory-specific rules
-- **Path Optimization**: Intelligent handling of import paths and module structures
-- **ESLint 9 Compatible**: Built for the latest ESLint flat config system
+- Ready for `eslint.config.mjs`
+- Includes `@next/eslint-plugin-next` (recommended + core web vitals)
+- Adds `eslint-plugin-react` and `eslint-plugin-react-hooks`
+- Extends `eslint-config-love` for stronger TypeScript rules
+- Sets common browser and Node globals
+- Applies extra strict rules to code in `app/` and `src/`
 
-## Installation
-
-```bash
-# Using npm
-npm install eslint-config-nice-nextjs --save-dev
-
-# Using yarn
-yarn add eslint-config-nice-nextjs --dev
-
-# Using pnpm
-pnpm add eslint-config-nice-nextjs --save-dev
-```
-
-## Required Peer Dependencies
-
-This configuration requires the following peer dependencies:
+## Install
 
 ```bash
-npm install eslint@^9.0 typescript@^5.0 @next/eslint-plugin-next@^15.2.4 @typescript-eslint/utils@^8.29.0 typescript-eslint@^8.29.0 --save-dev
+# pnpm
+pnpm add -D eslint-config-nice-nextjs
+
+# npm
+npm install --save-dev eslint-config-nice-nextjs
+
+# yarn
+yarn add --dev eslint-config-nice-nextjs
 ```
 
-> **Note**: [TypeScript](https://www.typescriptlang.org/) (v5.0+) is a crucial dependency for this configuration to work properly.
+### Peer packages
 
-## Usage
+Your project should already depend on:
 
-Create an `eslint.config.mjs` file in your project root:
+- `eslint@^9`
+- `eslint-config-next@^15.5.4`
+- `@next/eslint-plugin-next@^15.2.4`
+- `eslint-plugin-react@^7.37.5`
+- `eslint-plugin-react-hooks@^7`
+- `typescript` (optional but recommended)
+
+Install any you are missing:
+
+```bash
+pnpm add -D eslint@^9 eslint-config-next@^15.5.4 @next/eslint-plugin-next@^15.2.4 eslint-plugin-react@^7.37.5 eslint-plugin-react-hooks@^7 typescript
+```
+
+## Use it
+
+Create `eslint.config.mjs` in your project (or update the existing file):
 
 ```javascript
-// eslint.config.mjs
 import niceNextjs from 'eslint-config-nice-nextjs';
 
 export default niceNextjs;
 ```
 
-### With Prettier
-
-To integrate with Prettier, install the necessary dependencies:
-
-```bash
-npm install eslint-plugin-prettier prettier --save-dev
-```
-
-Then, update your configuration:
+To tweak ignores or rules, spread the config and add your own blocks:
 
 ```javascript
-// @ts-check
 import niceNextjs from 'eslint-config-nice-nextjs';
-import prettier from 'eslint-plugin-prettier/recommended';
 
 export default [
-  ...niceNextjs,
-  prettier
+   { ignores: ['.turbo/**', 'cypress/**'] },
+   ...niceNextjs,
+   {
+      files: ['tests/**/*.{ts,tsx}'],
+      rules: { 'no-console': 'off' },
+   },
 ];
 ```
 
-## Configuration Details
+### With Prettier
 
-This ESLint configuration provides:
+```bash
+pnpm add -D prettier eslint-plugin-prettier
+```
 
-1. **Global Ignores**:
-   - `.next/**/*`
-   - `.pnpm-store/**/*`
-   - `node_modules/**/*`
+```javascript
+import niceNextjs from 'eslint-config-nice-nextjs';
+import prettier from 'eslint-plugin-prettier/recommended';
 
-2. **Plugin Integration**:
-   - React ([`eslint-plugin-react`](https://github.com/jsx-eslint/eslint-plugin-react))
-   - React Hooks ([`eslint-plugin-react-hooks`](https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks))
-   - Next.js ([`@next/eslint-plugin-next`](https://nextjs.org/docs/app/building-your-application/configuring/eslint))
+export default [...niceNextjs, prettier];
+```
 
-3. **Rules Configuration**:
-   - React JSX runtime rules
-   - React Hooks recommended rules
-   - Next.js recommended rules
-   - Next.js core web vitals rules
-   - TypeScript-specific enforcements from [`eslint-config-love`](https://github.com/mightyiam/eslint-config-love):
-     - Strict boolean expressions
-     - Explicit function return types
-     - No magic numbers
-     - Complexity limiting
-     - Destructuring preferences
+## What you get
 
-4. **File Patterns**:
-   - Applies specific rules to TypeScript and JavaScript files in `src/` and `app/` directories
+- Ignores for `.next/**`, `.pnpm-store/**`, and `node_modules/**`
+- React flat presets, including the JSX runtime rules
+- React Hooks recommended rules
+- Next.js recommended + core web vitals rules
+- TypeScript-focused rules from `eslint-config-love`
+- Shared browser+Node globals
+- Extra strict rules for files inside `app/` and `src/`
 
-## Base Configuration
+See `src/index.ts` if you want the full detail.
 
-This package extends [`eslint-config-love`](https://github.com/mightyiam/eslint-config-love) (v119+), which provides a solid foundation of rules for TypeScript and JavaScript projects. It combines these rules with Next.js-specific configurations to create an optimal development experience.
+## Example app
 
-## TypeScript Support
+The repo includes `ts-next-app/`, which uses the built config from `dist/`:
 
-Ensure your project has a `tsconfig.json` file at the root level. This configuration is optimized for TypeScript projects but works with JavaScript as well.
+```bash
+cd ts-next-app
+pnpm lint
+```
 
-## Contributing
+Some files in that app break the rules on purpose so you can see the errors. Fix them or ignore them if you want a clean run. This app used for the CI testsbefore releasing the new version.
 
-Contributions are welcome! Feel free to submit issues or pull requests to enhance this configuration.
+## Contribute
+
+Open an issue or PR if you spot something. Run lint and build before sending changes. Update this README and add a Changeset when you change the published rules.
 
 ## License
 
-This project is licensed under the [MIT License](#license).
+[MIT](LICENSE)

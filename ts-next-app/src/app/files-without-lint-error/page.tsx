@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import type { ReactNode } from "react";
+import ReactHooksPluginTest from "../ReactHooksPluginTest";
 
 export default function Home():ReactNode {
   return (
@@ -14,6 +15,7 @@ export default function Home():ReactNode {
           height={38}
           priority
         />
+        <ReactHooksPluginTest/>
         <ol>
           <li>
             Get started by editing <code>src/app/page.tsx</code>.
