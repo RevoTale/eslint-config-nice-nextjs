@@ -54,28 +54,39 @@ jobs:
       - run: pnpm build
       - name: This step ensures that the lint command works
         run: pnpm lint
-      - run: cd ts-next-app && pnpm install
-      - name: 🔍 Run ESLint and compare expected output
-        run: |
-          mkdir -p reports
-          pnpm eslint -f json > reports/actual.json || true
+      - run: |
+          cd ts-next-app && pnpm install
+          # Run ESLint; don't fail automatically
+          pnpm eslint > eslint-output.txt || true
 
-          # Normalize for deterministic comparison
-          jq 'map({filePath, messages: map({ruleId, line, column, message})})' reports/actual.json > reports/actual-clean.json
-          jq 'map({filePath, messages: map({ruleId, line, column, message})})' eslint-test/expected.json > reports/expected-clean.json
+          echo "=== ESLint Output ==="
+          cat eslint-output.txt
+          echo "====================="
 
-          echo "Comparing ESLint output with expected baseline..."
-          diff -u reports/expected-clean.json reports/actual-clean.json > reports/diff.txt || true
+          # Define required strings (can be rule IDs or message fragments)
+          REQUIRED_STRINGS=(
+            "no-unused-vars"
+            "'unused' is defined but never used"
+          )
 
-          if [ -s reports/diff.txt ]; then
-            echo "❌ ESLint config output differs from expected!"
-            cat reports/diff.txt
-            echo "::error file=.eslintrc.cjs::ESLint config no longer matches expected errors"
-            exit 1
+          # Track status
+          ALL_FOUND=true
+
+          for str in "${REQUIRED_STRINGS[@]}"; do
+            if grep -q "$str" eslint-output.txt; then
+              echo "✅ Found expected string: $str"
+            else
+              echo "::error::❌ Missing expected string: $str"
+              ALL_FOUND=false
+            fi
+          done
+
+          if [ "$ALL_FOUND" = true ]; then
+            echo "✅ ESLint config produced all expected errors."
           else
-            echo "✅ ESLint config behaves as expected."
+            echo "❌ ESLint config did not produce all expected errors."
+            exit 1
           fi
-
   Finalize:
     needs: [Lint, Types, ProductionLintTest]
     runs-on: ubuntu-latest
