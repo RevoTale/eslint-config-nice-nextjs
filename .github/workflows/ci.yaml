@@ -55,31 +55,27 @@ jobs:
       - name: This step ensures that the lint command works
         run: pnpm lint
       - run: cd ts-next-app && pnpm install
-      - name: Run ESLint in ts-next-app
-        id: eslint_test
-        working-directory: ts-next-app
-        continue-on-error: true
+      - name: 🔍 Run ESLint and compare expected output
         run: |
-          set -euo pipefail
-          pnpm lint 2>&1 | tee eslint-output.log
+          mkdir -p reports
+          pnpm eslint -f json > reports/actual.json || true
 
-          {
-            echo 'lint_output<<EOF'
-            cat eslint-output.log
-            echo EOF
-          } >> "$GITHUB_OUTPUT"
-      - name: Fail if lint unexpectedly passed
-        if: steps.eslint_test.conclusion == 'success'
-        run: |
-          echo "Expected ESLint to report the known errors, but it passed."
-          exit 1
-      - name: Check ESLint errors
-        run: |
-          lint_output="${{ steps.eslint_test.outputs.lint_output }}"
+          # Normalize for deterministic comparison
+          jq 'map({filePath, messages: map({ruleId, line, column, message})})' reports/actual.json > reports/actual-clean.json
+          jq 'map({filePath, messages: map({ruleId, line, column, message})})' eslint-test/expected.json > reports/expected-clean.json
 
-          printf '%s\n' "$lint_output" | grep -q "React Hook useEffect has a missing dependency: 'state'.*react-hooks/exhaustive-deps"
-          printf '%s\n' "$lint_output" | grep -q "'ReactNode' is defined but never used.*@typescript-eslint/no-unused-vars"
-          printf '%s\n' "$lint_output" | grep -q "Missing return type on function.*@typescript-eslint/explicit-function-return-type"
+          echo "Comparing ESLint output with expected baseline..."
+          diff -u reports/expected-clean.json reports/actual-clean.json > reports/diff.txt || true
+
+          if [ -s reports/diff.txt ]; then
+            echo "❌ ESLint config output differs from expected!"
+            cat reports/diff.txt
+            echo "::error file=.eslintrc.cjs::ESLint config no longer matches expected errors"
+            exit 1
+          else
+            echo "✅ ESLint config behaves as expected."
+          fi
+
   Finalize:
     needs: [Lint, Types, ProductionLintTest]
     runs-on: ubuntu-latest

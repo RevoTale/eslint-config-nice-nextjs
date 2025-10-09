@@ -1,0 +1,13 @@
+[
+  {
+    "filePath": "eslint-test/invalid-example.js",
+    "messages": [
+      {
+        "ruleId": "no-unused-vars",
+        "line": 1,
+        "column": 10,
+        "message": "'unused' is defined but never used."
+      }
+    ]
+  }
+]
