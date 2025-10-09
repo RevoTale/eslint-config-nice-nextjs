@@ -68,7 +68,6 @@ jobs:
             cat eslint-output.log
             echo EOF
           } >> "$GITHUB_OUTPUT"
-        continue-on-error: true
       - name: Fail if lint unexpectedly passed
         if: steps.eslint_test.conclusion == 'success'
         run: |
