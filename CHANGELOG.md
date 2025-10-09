@@ -1,5 +1,16 @@
 # eslint-config-nice-nextjs
 
+## 0.3.0
+
+### Minor Changes
+
+- 24bead8: Fix the misconfigured react-hooks plugin. Also, require the minimum version 7 as it supports natively flat config.
+
+### Patch Changes
+
+- 0c30e9b: Enable back all react plugin and jsx runtime rules with flat config.
+- aad2fd9: Redesign how config is tested. Require errors to be present selectively.
+
 ## 0.2.0
 
 ### Minor Changes

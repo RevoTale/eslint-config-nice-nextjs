@@ -62,7 +62,6 @@ jobs:
           echo "=== ESLint Output ==="
           cat eslint-output.txt
           echo "====================="
-
           # Define required strings (can be rule IDs or message fragments)
           REQUIRED_STRINGS=(
             "no-unused-vars"
