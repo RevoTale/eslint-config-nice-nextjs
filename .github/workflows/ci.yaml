@@ -66,7 +66,8 @@ jobs:
           # Define required strings (can be rule IDs or message fragments)
           REQUIRED_STRINGS=(
             "no-unused-vars"
-            "'unused' is defined but never used"
+            "react-hooks/exhaustive-deps"
+            "@typescript-eslint/explicit-function-return-type"
           )
 
           # Track status
