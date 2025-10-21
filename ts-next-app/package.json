@@ -19,7 +19,7 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "eslint": "^9.36.0",
-    "eslint-config-love": "^130.0.0",
+    "eslint-config-love": "^133.0.0",
     "eslint-config-next": "15.5.4",
     "typescript": "^5.9.3"
   }
