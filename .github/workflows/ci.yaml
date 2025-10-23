@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
       - main
+      - "changeset-release/main"
   workflow_run: # Trigger on workflows run by Changesets
     workflows: ["Release"]
     types:

@@ -1,5 +1,15 @@
 # eslint-config-nice-nextjs
 
+## 0.4.0
+
+### Minor Changes
+
+- a466317: Support Next.js 16
+
+### Patch Changes
+
+- 70bff28: Add testing of nextjs core vital
+
 ## 0.3.0
 
 ### Minor Changes
