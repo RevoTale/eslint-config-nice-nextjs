@@ -20,6 +20,7 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
+        <img src="invalid-image" alt="This will cause an eslint error" />
 
         <div className={styles.ctas}>
           <a
