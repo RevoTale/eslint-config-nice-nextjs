@@ -68,6 +68,7 @@ jobs:
             "react-hooks/exhaustive-deps"
             "@typescript-eslint/explicit-function-return-type"
             "'React' is defined but never used"
+            "https://nextjs.org/docs/messages/no-img-element"
           )
 
           # Track status

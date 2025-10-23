@@ -1,9 +1,8 @@
  
 
-import { defineConfig } from 'eslint/config';
+import { defineConfig, type Config } from 'eslint/config';
 import love from 'eslint-config-love';
 import nextPlugin from '@next/eslint-plugin-next';
-import type { Config } from '@eslint/config-helpers';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactPlugin from 'eslint-plugin-react'
 import globals from 'globals';
@@ -45,8 +44,8 @@ const config: Config[] = defineConfig(
     // @ts-expect-error -- misused spread, but we need to keep it until the plugin is updated
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access -- misused spread, but we need to keep it until the plugin is updated
     reactHooks.configs.flat.recommended,
-  nextPlugin.flatConfig.coreWebVitals,
-    nextPlugin.flatConfig.recommended,
+    nextPlugin.configs['core-web-vitals'],
+    nextPlugin.configs.recommended,
     {
         files: ['{src,app}/**/*.{js,ts,tsx}'],
         rules: {
