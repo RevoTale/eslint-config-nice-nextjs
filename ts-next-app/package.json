@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "dist": "link:../dist",
-    "next": "16.0.3",
+    "next": "16.0.5",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
@@ -20,7 +20,7 @@
     "@types/react-dom": "^19.2.2",
     "eslint": "^9.38.0",
     "eslint-config-love": "^134.0.0",
-    "eslint-config-next": "16.0.3",
+    "eslint-config-next": "16.0.5",
     "typescript": "^5.9.3"
   }
 }
