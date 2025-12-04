@@ -11,8 +11,8 @@
   "dependencies": {
     "dist": "link:../dist",
     "next": "16.0.7",
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react": "19.2.1",
+    "react-dom": "19.2.1"
   },
   "devDependencies": {
     "@types/node": "^24.9.1",
@@ -20,7 +20,7 @@
     "@types/react-dom": "^19.2.2",
     "eslint": "^9.38.0",
     "eslint-config-love": "^136.0.0",
-    "eslint-config-next": "16.0.6",
+    "eslint-config-next": "16.0.7",
     "typescript": "^5.9.3"
   }
 }
