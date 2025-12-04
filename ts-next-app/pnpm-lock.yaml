@@ -34,8 +34,8 @@ importers:
         specifier: ^9.38.0
         version: 9.39.1
       eslint-config-love:
-        specifier: ^134.0.0
-        version: 134.0.0(@typescript-eslint/parser@8.46.2(eslint@9.39.1)(typescript@5.9.3))(eslint@9.39.1)(typescript@5.9.3)
+        specifier: ^136.0.0
+        version: 136.0.0(@typescript-eslint/parser@8.46.2(eslint@9.39.1)(typescript@5.9.3))(eslint@9.39.1)(typescript@5.9.3)
       eslint-config-next:
         specifier: 16.0.6
         version: 16.0.6(@typescript-eslint/parser@8.46.2(eslint@9.39.1)(typescript@5.9.3))(eslint@9.39.1)(typescript@5.9.3)
@@ -831,8 +831,8 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
-  eslint-config-love@134.0.0:
-    resolution: {integrity: sha512-kDMgnb3jtFqRL6g1WjZrWpkv1p4sKpbvnzZ3hw4VcbFtwtAx5iQToi89Wb0YvajdncJCxiodcjupmfDk1pc6Ww==}
+  eslint-config-love@136.0.0:
+    resolution: {integrity: sha512-U7CSZgDNqaaG1An+vWDf4pk0Uye1hXwsndoLBb9npqjVcXGhzILI3dOkXIvlt90tufFWYvlSvB0fD6Anlirkqw==}
     peerDependencies:
       eslint: ^9.35.0
       typescript: '*'
@@ -1368,6 +1368,7 @@ packages:
   next@16.0.7:
     resolution: {integrity: sha512-3mBRJyPxT4LOxAJI6IsXeFtKfiJUbjCLgvXO02fV8Wy/lIhPvP94Fe7dGhUgHXcQy4sSuYwQNcOLhIfOm0rL0A==}
     engines: {node: '>=20.9.0'}
+    deprecated: This version has a security vulnerability. Please upgrade to a patched version. See https://nextjs.org/blog/CVE-2025-66478 for more details.
     hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
@@ -2638,7 +2639,7 @@ snapshots:
       eslint: 9.39.1
       semver: 7.7.3
 
-  eslint-config-love@134.0.0(@typescript-eslint/parser@8.46.2(eslint@9.39.1)(typescript@5.9.3))(eslint@9.39.1)(typescript@5.9.3):
+  eslint-config-love@136.0.0(@typescript-eslint/parser@8.46.2(eslint@9.39.1)(typescript@5.9.3))(eslint@9.39.1)(typescript@5.9.3):
     dependencies:
       '@typescript-eslint/utils': 8.46.2(eslint@9.39.1)(typescript@5.9.3)
       eslint: 9.39.1
