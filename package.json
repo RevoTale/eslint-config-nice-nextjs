@@ -68,7 +68,7 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@10.28.2",
+  "packageManager": "pnpm@10.31.0",
   "files": [
     "dist",
     "package.json"
