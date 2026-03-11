@@ -1,4 +1,7 @@
 # eslint-config-nice-nextjs
+> [!WARNING]
+> This config is not maintained anymore. Since the Biome is more stable and faster migrate your Next.js/Typescript linting to the https://github.com/biomejs/biome
+
 
 An ESLint setup for Next.js apps. It uses the ESLint flat config style (ESLint 9+) and pulls in React, React Hooks, Next.js, and TypeScript rules so you get useful checks out of the box.
 
